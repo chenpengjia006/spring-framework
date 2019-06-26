@@ -770,6 +770,11 @@ public class XmlBeanFactoryTests {
 		new XmlBeanDefinitionReader(xbf).loadBeanDefinitions(INVALID_CONTEXT);
 	}
 
+
+	/**
+	 * 测试自动装配功能
+	 * @throws Exception
+	 */
 	@Test
 	public void testAutowire() throws Exception {
 		DefaultListableBeanFactory xbf = new DefaultListableBeanFactory();

@@ -533,6 +533,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// Initialize message source for this context.
 				initMessageSource();
 
+				/**
+				 * 初始化事件分发器
+				 */
 				// Initialize event multicaster for this context.
 				initApplicationEventMulticaster();
 
@@ -742,6 +745,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 	/**
 	 * 初始化ApplictionEvent分发器
+	 * 默认实现为
+	 * @see SimpleApplicationEventMulticaster
+	 * 可以自定义其实现
+	 *
 	 * Initialize the ApplicationEventMulticaster.
 	 * Uses SimpleApplicationEventMulticaster if none defined in the context.
 	 * @see org.springframework.context.event.SimpleApplicationEventMulticaster
