@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -74,6 +75,13 @@ public class BeanFactoryUtilsTests {
 		new XmlBeanDefinitionReader(this.dependentBeansFactory).loadBeanDefinitions(DEPENDENT_BEANS_CONTEXT);
 		dependentBeansFactory.preInstantiateSingletons();
 		this.listableBeanFactory = child;
+	}
+
+	@Test
+	public void getBeansTest(){
+		Object  something = listableBeanFactory.getBean("something");
+		System.out.println(something.toString());
+		Assert.assertNotNull(something);
 	}
 
 
