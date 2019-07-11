@@ -22,11 +22,6 @@ import org.springframework.core.AttributeAccessor;
 import org.springframework.lang.Nullable;
 
 /**
- * 一个BeanDefinition描述了一个bean示例，例如属性值，构造方法，
- * 更多的承载信息需要依赖特定实现。
- * 此接口为最小接口，仅仅用于{@link BeanFactoryPostProcessor}
- * 例如{@link PropertyPlaceholderConfigurer}
- * 去创建和定义属性及其他源数据
  * A BeanDefinition describes a bean instance, which has property values,
  * constructor argument values, and further information supplied by
  * concrete implementations.

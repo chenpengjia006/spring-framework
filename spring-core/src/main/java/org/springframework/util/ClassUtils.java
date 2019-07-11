@@ -327,6 +327,7 @@ public abstract class ClassUtils {
 	}
 
 	/**
+	 * 判定制定的全限定名Class是否可以被成功加载
 	 * Determine whether the {@link Class} identified by the supplied name is present
 	 * and can be loaded. Will return {@code false} if either the class or
 	 * one of its dependencies is not present or cannot be loaded.

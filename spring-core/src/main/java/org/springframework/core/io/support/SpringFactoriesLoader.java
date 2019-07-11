@@ -108,6 +108,7 @@ public final class SpringFactoriesLoader {
 	}
 
 	/**
+	 * 使用给定类型和类加载器加载全限定名工厂实现
 	 * Load the fully qualified class names of factory implementations of the
 	 * given type from {@value #FACTORIES_RESOURCE_LOCATION}, using the given
 	 * class loader.
@@ -123,6 +124,7 @@ public final class SpringFactoriesLoader {
 	}
 
 	private static Map<String, List<String>> loadSpringFactories(@Nullable ClassLoader classLoader) {
+		//如果已经创建 则直接返回
 		MultiValueMap<String, String> result = cache.get(classLoader);
 		if (result != null) {
 			return result;
