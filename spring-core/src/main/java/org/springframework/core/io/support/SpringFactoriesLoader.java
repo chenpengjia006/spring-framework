@@ -109,6 +109,7 @@ public final class SpringFactoriesLoader {
 
 	/**
 	 * 使用给定类型和类加载器加载全限定名工厂实现
+	 * 没有的话设定为null
 	 * Load the fully qualified class names of factory implementations of the
 	 * given type from {@value #FACTORIES_RESOURCE_LOCATION}, using the given
 	 * class loader.
@@ -120,9 +121,16 @@ public final class SpringFactoriesLoader {
 	 */
 	public static List<String> loadFactoryNames(Class<?> factoryClass, @Nullable ClassLoader classLoader) {
 		String factoryClassName = factoryClass.getName();
+		//默认为空
 		return loadSpringFactories(classLoader).getOrDefault(factoryClassName, Collections.emptyList());
 	}
 
+
+	/**
+	 * 查找是否有配置对应实现
+	 * @param classLoader
+	 * @return
+	 */
 	private static Map<String, List<String>> loadSpringFactories(@Nullable ClassLoader classLoader) {
 		//如果已经创建 则直接返回
 		MultiValueMap<String, String> result = cache.get(classLoader);
@@ -131,9 +139,8 @@ public final class SpringFactoriesLoader {
 		}
 
 		try {
-			Enumeration<URL> urls = (classLoader != null ?
-					classLoader.getResources(FACTORIES_RESOURCE_LOCATION) :
-					ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));
+			//加载默认配置 遍历搜索是否存在相应接口的实现
+			Enumeration<URL> urls = (classLoader != null ? classLoader.getResources(FACTORIES_RESOURCE_LOCATION) : ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));
 			result = new LinkedMultiValueMap<>();
 			while (urls.hasMoreElements()) {
 				URL url = urls.nextElement();
@@ -150,8 +157,7 @@ public final class SpringFactoriesLoader {
 			return result;
 		}
 		catch (IOException ex) {
-			throw new IllegalArgumentException("Unable to load factories from location [" +
-					FACTORIES_RESOURCE_LOCATION + "]", ex);
+			throw new IllegalArgumentException("Unable to load factories from location [" + FACTORIES_RESOURCE_LOCATION + "]", ex);
 		}
 	}
 

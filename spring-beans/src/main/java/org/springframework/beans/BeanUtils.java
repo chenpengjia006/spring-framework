@@ -72,6 +72,7 @@ public abstract class BeanUtils {
 
 
 	/**
+	 * 无参构造方法初始化对象
 	 * Convenience method to instantiate a class using its no-arg constructor.
 	 * @param clazz class to instantiate
 	 * @return the new instance
@@ -97,7 +98,9 @@ public abstract class BeanUtils {
 		}
 	}
 
+
 	/**
+	 * 使用默认构造方法初始化Bean，大部分时间使用无参构造方法
 	 * Instantiate a class using its 'primary' constructor (for Kotlin classes,
 	 * potentially having default arguments declared) or its default constructor
 	 * (for regular Java classes, expecting a standard no-arg setup).
@@ -122,6 +125,7 @@ public abstract class BeanUtils {
 			return instantiateClass(clazz.getDeclaredConstructor());
 		}
 		catch (NoSuchMethodException ex) {
+			//如果没有无参构造方法则使用私有构造方法
 			Constructor<T> ctor = findPrimaryConstructor(clazz);
 			if (ctor != null) {
 				return instantiateClass(ctor);
