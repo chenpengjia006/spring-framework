@@ -339,6 +339,7 @@ public class ScheduledTaskRegistrar implements ScheduledTaskHolder, Initializing
 	@SuppressWarnings("deprecation")
 	protected void scheduleTasks() {
 		if (this.taskScheduler == null) {
+			//不指定线程池的化默认使用单线程 可能出现任务阻塞
 			this.localExecutor = Executors.newSingleThreadScheduledExecutor();
 			this.taskScheduler = new ConcurrentTaskScheduler(this.localExecutor);
 		}

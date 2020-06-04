@@ -382,6 +382,7 @@ public class ScheduledAnnotationBeanPostProcessor
 		try {
 			//进行包装 ScheduledMethodRunnable
 			Runnable runnable = createRunnable(bean, method);
+			//定义是否已经处理完Flag 三种方式只能生效一次
 			boolean processedSchedule = false;
 			String errorMessage =
 					"Exactly one of the 'cron', 'fixedDelay(String)', or 'fixedRate(String)' attributes is required";
@@ -427,6 +428,7 @@ public class ScheduledAnnotationBeanPostProcessor
 						else {
 							timeZone = TimeZone.getDefault();
 						}
+						//注册cron表达式定时任务
 						tasks.add(this.registrar.scheduleCronTask(new CronTask(runnable, new CronTrigger(cron, timeZone))));
 					}
 				}

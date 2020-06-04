@@ -172,10 +172,11 @@ public class ConcurrentTaskScheduler extends ConcurrentTaskExecutor implements T
 	@Nullable
 	public ScheduledFuture<?> schedule(Runnable task, Trigger trigger) {
 		try {
+			//jdk7 模式
 			if (this.enterpriseConcurrentScheduler) {
 				return new EnterpriseConcurrentTriggerScheduler().schedule(decorateTask(task, true), trigger);
-			}
-			else {
+			} else {
+				//JDK 8模式 ManagedScheduledExecutorService不可用
 				ErrorHandler errorHandler =
 						(this.errorHandler != null ? this.errorHandler : TaskUtils.getDefaultErrorHandler(true));
 				return new ReschedulingRunnable(task, trigger, this.scheduledExecutor, errorHandler).schedule();

@@ -77,6 +77,7 @@ class ReschedulingRunnable extends DelegatingErrorHandlingRunnable implements Sc
 				return null;
 			}
 			long initialDelay = this.scheduledExecutionTime.getTime() - System.currentTimeMillis();
+			//使用JDK ScheduledFuture进行定时任务处理
 			this.currentFuture = this.executor.schedule(this, initialDelay, TimeUnit.MILLISECONDS);
 			return this;
 		}
