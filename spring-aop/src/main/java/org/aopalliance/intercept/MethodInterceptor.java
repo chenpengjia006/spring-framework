@@ -43,6 +43,7 @@ package org.aopalliance.intercept;
 public interface MethodInterceptor extends Interceptor {
 
 	/**
+	 * 方法代理接口
 	 * Implement this method to perform extra treatments before and
 	 * after the invocation. Polite implementations would certainly
 	 * like to invoke {@link Joinpoint#proceed()}.
