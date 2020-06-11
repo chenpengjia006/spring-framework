@@ -40,6 +40,7 @@ import org.springframework.transaction.PlatformTransactionManager;
  * TransactionInterceptor simply calls the relevant superclass methods
  * such as {@link #invokeWithinTransaction} in the correct order.
  *
+ * 线程安全
  * <p>TransactionInterceptors are thread-safe.
  *
  * @author Rod Johnson
@@ -86,6 +87,12 @@ public class TransactionInterceptor extends TransactionAspectSupport implements 
 	}
 
 
+	/**
+	 * 实际事物实现入口
+	 * @param invocation the method invocation joinpoint
+	 * @return
+	 * @throws Throwable
+	 */
 	@Override
 	@Nullable
 	public Object invoke(MethodInvocation invocation) throws Throwable {
